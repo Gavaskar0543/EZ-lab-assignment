@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'clientAuthentication',
     'clientDocDownload',
     'posDocUpload',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
