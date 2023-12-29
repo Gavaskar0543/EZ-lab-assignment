@@ -20,8 +20,10 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')  # Use 'password1' as it contains the password
-            print(username,password)
-            user = authenticate(request, username=username, password=password)
+            email = form.cleaned_data.get('email')
+            
+            print(username,password,email)
+            user = authenticate(request, username=username, password=password, email=email)
             if user:
                 login(request, user)
                 return Response({'detail': 'Signup successful.'})
