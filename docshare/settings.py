@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'clientAuthentication',
     'clientDocDownload',
     'posDocUpload',
+    'rest_framework',
     
 ]
 
@@ -121,6 +122,21 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+
+
+
+
+
+FILE_UPLOAD_ALLOWED_MIME_TYPES = [
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    # ... other allowed types ...
+]
+
+FILE_UPLOAD_ALLOWED_EXTENSIONS = [
+    'docx',
+    # ... other allowed extensions ...
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
