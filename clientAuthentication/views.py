@@ -5,6 +5,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 @api_view(['POST'])
@@ -33,5 +35,21 @@ def signup(request):
 
     return Response({'detail': 'Method not allowed.'}, status=405)
 
+
+@csrf_exempt  # Disabling CSRF protection for demonstration purposes (not recommended in production)
 def signin(request):
-    return Response({'detail': 'login page.'}, status=202)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # Log in the user
+            login(request, user)
+            return JsonResponse({'detail': 'Login successful.'})
+        else:
+            return JsonResponse({'detail': 'Invalid username or password.'}, status=401)
+
+    return JsonResponse({'detail': 'Method not allowed.'}, status=405)
